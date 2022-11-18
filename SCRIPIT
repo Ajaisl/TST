@@ -1,0 +1,22 @@
+$array=Get-LocalGroupMember -Name 'Administrators' | Where-Object{ $_.PrincipalSource -eq "Local"} |Select-Object name
+$N=$array.COUNT
+
+    $cname1= hostname
+    $LA1 = $array[0].Name
+    $LA2 = $array[1].Name
+    $LA3 =$array[2].Name
+    $LA4 =$array[3].Name
+
+$objv2= @{
+ "ComputerName" = $cname1
+  "Count" = $N
+  "Usr1" = $LA1
+  "Usr2" = $LA2
+  "Usr3" = $LA3
+  "Usr4" = $LA4
+  "Usr5" = $LA5
+  "Usr6" = $LA6
+}
+
+$MyObject2 = New-Object -TypeName psobject -Property $objv2
+$MyObject2| Select ComputerName,Count,Usr1,Usr2,Usr3,Usr4,Usr5,Usr6  |Export-Csv -Path C:\abc.csv -NoTypeInformation -Append -Force
